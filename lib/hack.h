@@ -12,9 +12,15 @@
 
 class Hack {
 public:
-    virtual void freezeHealth(){
+    virtual void freezeHealth(bool enable){
 
     };
+    virtual void increaseBombs(bool enable){
+
+    };
+    virtual void freezeBombs(bool enable){
+
+    }
     Hack() = default;
 
 protected:
@@ -25,7 +31,9 @@ protected:
 class InternalHack: public Hack {
 public:
     InternalHack();
-    void freezeHealth() override;
+    void freezeHealth(bool enable) override;
+    void increaseBombs(bool enable) override;
+    void freezeBombs(bool enable) override;
 };
 
 class DemoHack: public Hack {

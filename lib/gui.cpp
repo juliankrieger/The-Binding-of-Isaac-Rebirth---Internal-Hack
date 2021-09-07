@@ -44,16 +44,45 @@ void GUI::draw() {
     Component healthBox = Checkbox(&healthLabel, &healthChecked);
 
     healthBox = CatchEvent(healthBox, [&](Event event) {
-        if(event == Event::Return) {
+        if(event == Event::Return || event == Event::Character(' ')) {
             healthChecked = !healthChecked;
-            this->hack->freezeHealth();
+            this->hack->freezeHealth(healthChecked);
+            return true;
         }
-        return true;
+        return false;
+    });
+
+    std::wstring bombLabel = L"Toggle Freeze Bombs";
+    bool bombChecked = false;
+    Component bombBox = Checkbox(&bombLabel, &bombChecked);
+
+    bombBox = CatchEvent(bombBox, [&](Event event) {
+        if(event == Event::Return || event == Event::Character(' ')) {
+            bombChecked = !bombChecked;
+            this->hack->freezeBombs(bombChecked);
+            return true;
+        }
+        return false;
+    });
+
+    std::wstring bombIncLabel = L"Toggle Increase Bombs";
+    bool bombIncChecked = false;
+    Component bombIncBox = Checkbox(&bombIncLabel, &bombIncChecked);
+
+    bombIncBox = CatchEvent(bombIncBox, [&](Event event) {
+        if(event == Event::Return || event == Event::Character(' ')) {
+            bombIncChecked = !bombIncChecked;
+            this->hack->increaseBombs(bombIncChecked);
+            return true;
+        }
+        return false;
     });
 
     std::vector<bool> states(3);
     auto container = Container::Vertical({
         healthBox,
+        bombBox,
+        bombIncBox
     });
 
     std::vector<Event> keys;

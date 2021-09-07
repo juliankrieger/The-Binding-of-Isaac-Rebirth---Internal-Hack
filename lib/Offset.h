@@ -8,6 +8,7 @@
 
 enum Offset {
     HEALTH_START = 0x14FFB6,
+    BOMB_DEC_START = 0x1660A3 // FF08 -> FF00
 };
 
 
