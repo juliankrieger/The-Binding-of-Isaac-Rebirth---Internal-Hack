@@ -19,3 +19,6 @@ It uses a [FTXUI TUI](https://github.com/ArthurSonzogni/FTXUI) to make different
 - Cd into the project folder
 - Run cmake --build cmake-build-debug --target DLL
 - Inject DLL with any cheap injector, you can use guidedhacking's injector or Cheat Engine for this. Isaac is an indy game, so we don't need to manual map here.
+
+## Other Info
+- To inspect the GUI without running cheat internals (injecting, accessing and changing memory), run `Demo.exe` in `cmake-build-debug/demo
