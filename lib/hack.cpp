@@ -49,3 +49,40 @@ void InternalHack::increaseBombs(bool enable) {
     }
 }
 
+void InternalHack::noKeysNeeded(bool enable) {
+    if(enable) {
+        mem::Nop((BYTE*)(this->moduleBase + Offset::KEY_TST_START), 15);
+    } else {
+        /**
+         * Original code:
+         * tst eax, eax
+         * jng isaac-ng.exe+150CF4
+         * dec eax,
+         * mov [esi+24D8], eax
+         */
+         auto original = (BYTE*)(
+                 "\x85\xC0"
+                 "\x0F\x8E\x5C\x01\x00\x00"
+                 "\x48"
+                 "\x89\x96\xD8\x24\x00\x00"
+                 );
+         mem::Patch((BYTE*)(this->moduleBase + Offset::KEY_TST_START), original, 15);
+    }
+}
+
+void InternalHack::unlimitedMoney(bool enable) {
+    if(enable) {
+        auto newFunc = (BYTE*)(
+                "\xB8\x63\x00\x00\x00" // mov eax, 99
+                "\x90\x90" // NOP NOP
+                );
+        mem::Patch((BYTE*)(this->moduleBase + Offset::SET_MONEY_ENTRY), newFunc, 7);
+    } else {
+        auto original = (BYTE*)(
+                "\x8B\x09" //mov ecx, [ecx]
+                "\x85\xC9" //tst ecx, ecx
+                "\x0F\x4F\xC1" //cmovg eax, ecx
+                );
+        mem::Patch((BYTE*)(this->moduleBase + Offset::SET_MONEY_ENTRY), original, 7);
+    }
+}

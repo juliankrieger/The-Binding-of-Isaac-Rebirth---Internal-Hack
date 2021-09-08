@@ -78,11 +78,39 @@ void GUI::draw() {
         return false;
     });
 
+    std::wstring noKeysNeeded = L"Toggle No Keys Needed";
+    bool noKeysNeededChecked = false;
+    Component noKeysNeededBox = Checkbox(&noKeysNeeded, &noKeysNeededChecked);
+
+    noKeysNeededBox = CatchEvent(noKeysNeededBox, [&](Event event) {
+        if(event == Event::Return || event == Event::Character(' ')) {
+            noKeysNeededChecked = !noKeysNeededChecked;
+            this->hack->noKeysNeeded(noKeysNeededChecked);
+            return true;
+        }
+        return false;
+    });
+
+    std::wstring unlimitedMoney = L"Toggle Unlimited Money";
+    bool unlimitedMoneyChecked = false;
+    Component unlimitedMoneyBox = Checkbox(&unlimitedMoney, &unlimitedMoneyChecked);
+
+    unlimitedMoneyBox = CatchEvent(unlimitedMoneyBox, [&](Event event) {
+        if(event == Event::Return || event == Event::Character(' ')) {
+            unlimitedMoneyChecked = !unlimitedMoneyChecked;
+            this->hack->unlimitedMoney(unlimitedMoneyChecked);
+            return true;
+        }
+        return false;
+    });
+
     std::vector<bool> states(3);
     auto container = Container::Vertical({
         healthBox,
         bombBox,
-        bombIncBox
+        bombIncBox,
+        noKeysNeededBox,
+        unlimitedMoneyBox
     });
 
     std::vector<Event> keys;

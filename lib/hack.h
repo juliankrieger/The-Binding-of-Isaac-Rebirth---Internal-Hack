@@ -21,6 +21,12 @@ public:
     virtual void freezeBombs(bool enable){
 
     }
+    virtual void unlimitedMoney(bool enable) {
+
+    }
+    virtual void noKeysNeeded(bool enable){
+
+    }
     Hack() = default;
 
 protected:
@@ -34,6 +40,8 @@ public:
     void freezeHealth(bool enable) override;
     void increaseBombs(bool enable) override;
     void freezeBombs(bool enable) override;
+    void noKeysNeeded(bool enable) override;
+    void unlimitedMoney(bool enable) override;
 };
 
 class DemoHack: public Hack {
