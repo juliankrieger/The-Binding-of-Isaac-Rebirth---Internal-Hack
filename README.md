@@ -6,7 +6,7 @@ It uses a [FTXUI TUI](https://github.com/ArthurSonzogni/FTXUI) to make different
 
 ## Features
 - Freeze Health (Replace the health subtraction instruction with NOPs)
-- Freeze Money at 9999
+- Freeze Money at 99
 - Freeze Bombs at 99
 - Freeze Keys at 99
 
